@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+  </head>
+  <style>
+    p{
+      border: 1px solid black;
+      padding: 10px;
+    }
+  </style>
+  <body>
+    <p>Click</p>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      var socket = io();
+      $('p').click(function(){
+        
+      });
+
+      var room = 'abc123';
+      socket.on('connect', function(){
+        socket.emit('room', room);
+        console.log("Connected");
+      });
+
+      socket.emit('send message');
+
+      socket.on('message', function(data){
+        console.log(data);
+      })
+    </script>
+  </body>
+</html>
