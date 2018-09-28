@@ -1,11 +1,11 @@
 {
-  "name": "MERN-boilerplate",
+  "name": "Chat Room",
   "version": "1.0.0",
-  "description": "MERN stack project boilerplate",
-  "author": "Eugene Cheung",
+  "description": "Chat Room for OS Assignment",
+  "author": "Nipun Bharti,Yashovardhan Siramdas,Akhil Jasrotia",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/arkon/MERN-boilerplate.git"
+    "url": "git+https://github.com/nipunbharti/Chat-app"
   },
   "license": "MIT",
   "private": true,
