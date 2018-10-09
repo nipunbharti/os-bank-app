@@ -12,12 +12,15 @@ app.get('/', function(req, res){
 });
 
 io.on('connection', function(socket){
+	console.log("test6");
   socket.on('room', function(room){
+  	console.log("test7");
   	console.log("Room:",room);
   	socket.join(room);
   })
-
+  console.log("test8");
   socket.on('send message', function(){
+  	console.log("test9");
   	io.in(room).emit('message','Hello room!');
   })
 });

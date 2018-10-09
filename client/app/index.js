@@ -9,6 +9,8 @@ import {
 } from 'react-router-dom'
 
 import App from './components/App/App';
+import Home from './components/Home/Home';
+
 
 import './styles/styles.scss';
 
