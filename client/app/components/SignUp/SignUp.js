@@ -38,14 +38,14 @@ class SignUp extends Component{
     }
 
     signUpDetails(){
-        fetch('/signUp',{
+        fetch('/api/signUp',{
             method: 'POST',
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                name: this.state.userName,
+                userName: this.state.userName,
                 email: this.state.email,
                 password: this.state.password
             }),
