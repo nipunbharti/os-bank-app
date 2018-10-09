@@ -1,4 +1,5 @@
 const User = require('../../models/User');
+const UserSession = require('../../models/UserSession');
 
 module.exports = (app) => {
 
@@ -70,4 +71,75 @@ module.exports = (app) => {
     });
 
   });
+
+  app.post('/api/login', function (req, res, next) {
+    let {body} = req;
+    let {email} = body;
+    let {password} = body;
+
+    if (!email) {
+      return res.send({
+        success: false,
+        message: 'Error: Email cannot be blank.'
+      });
+    }
+    if (!password) {
+      return res.send({
+        success: false,
+        message: 'Error: Password cannot be blank.'
+      });
+    }
+
+    email = email.toLowerCase();
+    email = email.trim();
+
+    // Steps:
+    // 1. Verify email exists
+    // 2. Check if the password is correct
+
+    User.find({
+      email: email
+    }, (err, users) => {
+      if (err) {
+        return res.send({
+          success: false,
+          message: 'Error: Server error'
+        });
+      }
+      if (users.length != 1) {
+        return res.send({
+          success: false,
+          message: 'Error: Invalid'
+        });
+      }
+
+      const user = users[0];
+      if (!user.validPassword(password)) {
+        return res.send({
+          success: false,
+          message: 'Error: Password didnt match'
+        });
+      }
+      // Create a Session for user
+      const userSession = new UserSession();
+      userSession.email = user.email;
+
+      userSession.save((err, doc) => {
+        if (err) {
+          return res.send({
+            success: false,
+            message: 'Error: Server error'
+          });
+        }
+        return res.send({
+          success: true,
+          message: 'Valid sign in',
+          token: doc._id,
+        });
+      })
+
+    });
+
+  });
+
 };
