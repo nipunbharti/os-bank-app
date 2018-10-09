@@ -12,8 +12,11 @@ class SignUp extends Component{
           password: '',
         };
 
+
         this.emitEmpty = this.emitEmpty.bind(this);
         this.onChangeInput = this.onChangeInput.bind(this);
+
+        this.signUpDetails = this.signUpDetails.bind(this);
       }
     
     emitEmpty() {
@@ -50,7 +53,8 @@ class SignUp extends Component{
                 password: this.state.password
             }),
         })
-        .then(res => console.log(res))
+        .then(res => res.json())
+        .then(json => console.log(json))
     }
 
     render(){
