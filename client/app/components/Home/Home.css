@@ -1,0 +1,10 @@
+.home{
+    display: flex;
+    flex-direction: row;
+}
+
+.credentials{
+    width:100%;
+    align-items: center;
+
+}

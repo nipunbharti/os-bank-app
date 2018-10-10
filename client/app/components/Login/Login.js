@@ -55,7 +55,7 @@ class Login extends Component{
     render(){
         console.log(localStorage.getItem('sessionToken'));
         return(
-            <div className="inputBoxContainer">
+            <div className="LoginInputBoxContainer">
                 <div className="inputBoxFlex">
                     <Input
                         placeholder="Enter your Email"
