@@ -59,36 +59,36 @@ class SignUp extends Component{
 
     render(){
         return(
-            <div className="inputBoxContainer">
-                <div className="inputBoxFlex">
-                    <Input
-                        placeholder="Enter your username"
-                        prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                        value={this.state.userName}
-                        onChange={(e) => this.onChangeInput(e, "username")}
-                        ref={node => this.userNameInput = node}
-                        style={{padding:'6px'}}
-                    />
-                    <Input
-                        placeholder="Enter your Email"
-                        prefix={<Icon type="mail" theme="outlined" />}
-                        value={this.state.email}
-                        onChange={(e) => this.onChangeInput(e, "email")}
-                        ref={node => this.userNameInput = node}
-                        style={{padding:'6px'}}
-                    />
-                    <Input
-                        placeholder="Enter your password"
-                        prefix={<Icon type="key" theme="outlined" />}
-                        value={this.state.password}
-                        onChange={(e) => this.onChangeInput(e, "password")}
-                        ref={node => this.userNameInput = node}
-                        type="password"
-                        style={{padding:'6px'}}
-                    />
+                <div className="inputBoxContainer">
+                    <div className="inputBoxFlex">
+                        <Input
+                            placeholder="Enter your username"
+                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                            value={this.state.userName}
+                            onChange={(e) => this.onChangeInput(e, "username")}
+                            ref={node => this.userNameInput = node}
+                            style={{padding:'6px'}}
+                        />
+                        <Input
+                            placeholder="Enter your Email"
+                            prefix={<Icon type="mail" theme="outlined" />}
+                            value={this.state.email}
+                            onChange={(e) => this.onChangeInput(e, "email")}
+                            ref={node => this.userNameInput = node}
+                            style={{padding:'6px'}}
+                        />
+                        <Input
+                            placeholder="Enter your password"
+                            prefix={<Icon type="key" theme="outlined" />}
+                            value={this.state.password}
+                            onChange={(e) => this.onChangeInput(e, "password")}
+                            ref={node => this.userNameInput = node}
+                            type="password"
+                            style={{padding:'6px'}}
+                        />
+                    </div>
+                    <Button type="primary" style={{padding:'6px'}} onClick={this.signUpDetails}>Sign Up</Button>
                 </div>
-                <Button type="primary" style={{padding:'6px'}} onClick={this.signUpDetails}>Sign Up</Button>
-            </div>
         );
     }
 }

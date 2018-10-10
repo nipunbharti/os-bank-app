@@ -4,6 +4,10 @@ import './Login.css';
 
 class Login extends Component{
 
+    componentWillMount(){
+        localStorage.setItem('sessionToken', null);
+      }
+
     constructor(props) {
         super(props);
         this.state = {
@@ -55,7 +59,7 @@ class Login extends Component{
     render(){
         console.log(localStorage.getItem('sessionToken'));
         return(
-            <div className="inputBoxContainer">
+            <div className="LoginInputBoxContainer">
                 <div className="inputBoxFlex">
                     <Input
                         placeholder="Enter your Email"

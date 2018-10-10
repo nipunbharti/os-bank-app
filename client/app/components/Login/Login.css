@@ -1,0 +1,10 @@
+.LoginInputBoxContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.LoginInputBoxFlex{
+    width: 20%;
+}
