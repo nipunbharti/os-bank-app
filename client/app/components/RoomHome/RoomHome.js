@@ -28,7 +28,7 @@ class RoomHome extends Component{
     render(){
         return(
             <div>
-                {(localStorage.getItem('sessionToken') == null)  ? 
+                {(localStorage.getItem('sessionToken') != null)  ? 
                 <div className="roomHomeContainer">
                     <div>Hello</div>
                     <Button type="primary" onClick={this.handleLogout}>Logout</Button>

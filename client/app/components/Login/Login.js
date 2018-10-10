@@ -1,12 +1,9 @@
 import React, {Component} from 'react';
 import {Input, Icon, Button} from 'antd';
+import {withRouter} from 'react-router-dom';
 import './Login.css';
 
 class Login extends Component{
-
-    componentWillMount(){
-        localStorage.setItem('sessionToken', null);
-      }
 
     constructor(props) {
         super(props);
@@ -52,7 +49,8 @@ class Login extends Component{
         .then(res => res.json())
         .then(json => {
             localStorage.setItem('sessionToken', json.token);
-            console.log(json)
+            this.props.history.push("/roomhome");
+            console.log(json);
         })
     }
 
@@ -85,4 +83,4 @@ class Login extends Component{
     }
 }
 
-export default Login;
+export default withRouter(Login);
