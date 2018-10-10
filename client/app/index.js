@@ -10,7 +10,7 @@ import {
 } from 'react-router-dom'
 
 import App from './components/App/App';
-import SignUp from './components/SignUp/SignUp';
+import Home from './components/Home/Home';
 
 
 import './styles/styles.scss';
@@ -19,7 +19,7 @@ render((
   <Router>
     <App>
       <Switch>
-        <Route exact path="/" component={SignUp}/>
+        <Route exact path="/" component={Home}/>
       </Switch>
     </App>
   </Router>
