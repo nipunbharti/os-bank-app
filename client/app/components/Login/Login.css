@@ -8,3 +8,8 @@
 .LoginInputBoxFlex{
     width: 20%;
 }
+
+.alertWrong{
+    width: 20%;
+    margin-bottom: 6px; 
+}

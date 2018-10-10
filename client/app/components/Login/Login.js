@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {Input, Icon, Button} from 'antd';
+import {Input, Icon, Button, Alert} from 'antd';
 import {withRouter} from 'react-router-dom';
 import './Login.css';
+import { timingSafeEqual } from 'crypto';
 
 class Login extends Component{
 
@@ -10,11 +11,13 @@ class Login extends Component{
         this.state = {
           email: '',
           password: '',
+          visible: false
         };
 
         this.emitEmpty = this.emitEmpty.bind(this);
         this.onChangeInput = this.onChangeInput.bind(this);
         this.loginDetails = this.loginDetails.bind(this);
+        this.handleAlertClose = this.handleAlertClose.bind(this);
       }
     
     emitEmpty() {
@@ -48,10 +51,23 @@ class Login extends Component{
         })
         .then(res => res.json())
         .then(json => {
-            localStorage.setItem('sessionToken', json.token);
-            localStorage.setItem('sessionMail', json.email);
-            this.props.history.push("/roomhome");
+            if(json.success == false){
+                this.setState({
+                    visible: true
+                })
+            }
+            else{
+                localStorage.setItem('sessionToken', json.token);
+                localStorage.setItem('sessionMail', json.email);
+                this.props.history.push("/roomhome");
+            }
             console.log(json);
+        })
+    }
+
+    handleAlertClose(){
+        this.setState({
+            visible: false
         })
     }
 
@@ -78,6 +94,7 @@ class Login extends Component{
                         style={{padding:'6px'}}
                     />
                 </div>
+                {this.state.visible ? <Alert message="Wrong password/email" type="error" closable afterClose={this.handleAlertClose} className="alertWrong" /> : <></>}
                 <Button type="primary" style={{padding:'6px'}} onClick={this.loginDetails}>Login</Button>
             </div>
         );
