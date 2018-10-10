@@ -61,13 +61,14 @@ class SignUp extends Component{
         return(
                 <div className="inputBoxContainer">
                     <div className="inputBoxFlex">
+                        <p className="inputBoxText">SignUp</p>
                         <Input
                             placeholder="Enter your username"
                             prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
                             value={this.state.userName}
                             onChange={(e) => this.onChangeInput(e, "username")}
                             ref={node => this.userNameInput = node}
-                            style={{padding:'6px'}}
+                            style={{padding:'6px',width:'200pt',height:'40pt'}}
                         />
                         <Input
                             placeholder="Enter your Email"
@@ -75,7 +76,7 @@ class SignUp extends Component{
                             value={this.state.email}
                             onChange={(e) => this.onChangeInput(e, "email")}
                             ref={node => this.userNameInput = node}
-                            style={{padding:'6px'}}
+                            style={{padding:'6px',width:'200pt',height:'40pt'}}
                         />
                         <Input
                             placeholder="Enter your password"
@@ -84,10 +85,11 @@ class SignUp extends Component{
                             onChange={(e) => this.onChangeInput(e, "password")}
                             ref={node => this.userNameInput = node}
                             type="password"
-                            style={{padding:'6px'}}
+                            style={{padding:'6px',width:'200pt',height:'40pt'}}
                         />
+                        <Button type="primary" style={{marginTop:'10pt',padding:'6px',width:'200pt',height:'30pt'}} onClick={this.signUpDetails}>Sign Up</Button>
                     </div>
-                    <Button type="primary" style={{padding:'6px'}} onClick={this.signUpDetails}>Sign Up</Button>
+                    
                 </div>
         );
     }

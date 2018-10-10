@@ -1,6 +1,6 @@
 .home{
     display: flex;
-    flex-direction: row;
+    flex-direction: row;    
 }
 
 .credentials{

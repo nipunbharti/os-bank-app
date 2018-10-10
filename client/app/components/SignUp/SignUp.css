@@ -1,6 +1,5 @@
-
 .inputBoxContainer{
-    margin-top: 100px;
+    margin-top: 60px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -9,4 +8,10 @@
 
 .inputBoxFlex{
     width: 20%;
+}
+
+.inputBoxText{
+    font-size: 25pt;
+    text-align: center;
+    font-weight: bold;
 }

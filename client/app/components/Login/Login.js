@@ -61,13 +61,14 @@ class Login extends Component{
         return(
             <div className="LoginInputBoxContainer">
                 <div className="inputBoxFlex">
+                    <p className="inputBoxText">Log In</p>
                     <Input
                         placeholder="Enter your Email"
                         prefix={<Icon type="mail" theme="outlined" />}
                         value={this.state.email}
                         onChange={(e) => this.onChangeInput(e, "email")}
                         ref={node => this.userNameInput = node}
-                        style={{padding:'6px'}}
+                        style={{padding:'6px',width:'200pt',height:'40pt'}}
                     />
                     <Input
                         placeholder="Enter your password"
@@ -76,11 +77,12 @@ class Login extends Component{
                         onChange={(e) => this.onChangeInput(e, "password")}
                         ref={node => this.userNameInput = node}
                         type="password"
-                        style={{padding:'6px'}}
+                        style={{padding:'6px',width:'200pt',height:'40pt'}}
                     />
+                    <Button type="primary" style={{marginTop:'10pt',padding:'6px',width:'200pt',height:'30pt'}} onClick={this.loginDetails}>Login</Button>
+           
                 </div>
-                <Button type="primary" style={{padding:'6px'}} onClick={this.loginDetails}>Login</Button>
-            </div>
+                 </div>
         );
     }
 }
