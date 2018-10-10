@@ -1,5 +1,4 @@
 .roomHomeContainer{
-    
 }
 
 .notLoggedIn{
@@ -9,4 +8,25 @@
     width: 100%;
     justify-content: center;
     height: 500px;
+}
+
+.logoutButton{
+    padding: 15px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.homeModals{
+    border: 1px solid black;
+    display: flex;
+    
+}
+
+.createModal{
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    height: 500px;
+    align-items: center;
 }

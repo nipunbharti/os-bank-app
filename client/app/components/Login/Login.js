@@ -49,6 +49,7 @@ class Login extends Component{
         .then(res => res.json())
         .then(json => {
             localStorage.setItem('sessionToken', json.token);
+            localStorage.setItem('sessionMail', json.email);
             this.props.history.push("/roomhome");
             console.log(json);
         })
