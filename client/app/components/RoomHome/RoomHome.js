@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Alert, Button } from 'antd';
+import JoinRoomModal from './JoinRoomModal';
 import './RoomHome.css';
 
 class RoomHome extends Component{
@@ -22,16 +23,26 @@ class RoomHome extends Component{
 
     handleLogout(){
         localStorage.setItem('sessionToken', null);
+        localStorage.setItem('sessionMail', null);
         this.props.history.push("/");
     }
 
     render(){
         return(
             <div>
-                {(localStorage.getItem('sessionToken') == null)  ? 
+                {(localStorage.getItem('sessionToken') != null)  ? 
                 <div className="roomHomeContainer">
-                    <div>Hello</div>
-                    <Button type="primary" onClick={this.handleLogout}>Logout</Button>
+                    <div className="logoutButton">
+                        <Button type="primary" onClick={this.handleLogout}>Logout</Button>
+                    </div>
+                    <div className="homeModals">
+                        <div className="createModal">
+                            <JoinRoomModal buttonText="Create Room" type="create" modalTitle="Create room" />
+                        </div>
+                        <div className="createModal">
+                            <JoinRoomModal buttonText="Join Room" type="join" modalTitle="Join room" />
+                        </div>
+                    </div>
                 </div>
                 :
                 <div className="notLoggedIn">

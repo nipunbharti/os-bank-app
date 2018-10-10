@@ -135,6 +135,7 @@ module.exports = (app) => {
           success: true,
           message: 'Valid sign in',
           token: doc._id,
+          email: doc.email
         });
       })
 
