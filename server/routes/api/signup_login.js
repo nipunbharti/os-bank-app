@@ -142,4 +142,31 @@ module.exports = (app) => {
 
   });
 
+  app.get('/api/logout', (req, res, next) => {
+      const {query} = req;
+      const {token} = query;
+
+      UserSession.findOneAndUpdate({
+        _id: token,
+        isDeleted: false
+      }, {
+        $set: {
+          isDeleted:true
+        }
+      }, null, (err, sessions) => {
+        if (err) {
+          return res.send({
+            success: false,
+            message: 'Error: Server error'
+          });
+        }
+
+        return res.send({
+          success: true,
+          message: 'Successfully Logged out'
+        });
+      });
+    });
+
+
 };

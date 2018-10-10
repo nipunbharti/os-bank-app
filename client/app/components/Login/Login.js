@@ -4,6 +4,10 @@ import './Login.css';
 
 class Login extends Component{
 
+    componentWillMount(){
+        localStorage.setItem('sessionToken', null);
+      }
+
     constructor(props) {
         super(props);
         this.state = {

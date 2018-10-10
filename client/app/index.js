@@ -11,6 +11,7 @@ import {
 
 import App from './components/App/App';
 import Home from './components/Home/Home';
+import RoomHome from './components/RoomHome/RoomHome';
 
 
 import './styles/styles.scss';
@@ -20,6 +21,7 @@ render((
     <App>
       <Switch>
         <Route exact path="/" component={Home}/>
+        <Route  path="/roomhome" component={RoomHome}/>
       </Switch>
     </App>
   </Router>
