@@ -10,6 +10,7 @@ class RoomHome extends Component{
             visible: true
         };
         this.handleClose = this.handleClose.bind(this);
+        this.handleLogout = this.handleLogout.bind(this);
     }
 
     handleClose(){
@@ -19,12 +20,18 @@ class RoomHome extends Component{
         this.props.history.push("/");
     }
 
+    handleLogout(){
+        localStorage.setItem('sessionToken', null);
+        this.props.history.push("/");
+    }
+
     render(){
         return(
             <div>
                 {(localStorage.getItem('sessionToken') == null)  ? 
                 <div className="roomHomeContainer">
                     <div>Hello</div>
+                    <Button type="primary" onClick={this.handleLogout}>Logout</Button>
                 </div>
                 :
                 <div className="notLoggedIn">
