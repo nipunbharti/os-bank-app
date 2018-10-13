@@ -22,6 +22,8 @@ mongoose.connect(isDev ? config.db_dev : config.db);
 mongoose.Promise = global.Promise;
 
 const app = express();
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -58,7 +60,7 @@ if (isDev) {
   });
 }
 
-app.listen(port, '0.0.0.0', (err) => {
+server.listen(port, '0.0.0.0', (err) => {
   if (err) {
     console.log(err);
   }
