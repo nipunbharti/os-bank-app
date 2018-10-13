@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Alert, Button } from 'antd';
 import JoinRoomModal from './JoinRoomModal';
+import io from "socket.io-client";
 import './RoomHome.css';
 
 class RoomHome extends Component{
@@ -8,10 +9,29 @@ class RoomHome extends Component{
     constructor(){
         super();
         this.state = {
-            visible: true
+            visible: true,
+            socket: null
         };
         this.handleClose = this.handleClose.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
+    }
+
+    componentWillMount(){
+        this.initSocket();
+    }
+
+    initSocket(){
+        const socket = io('http://localhost:8080');
+        socket.on('connect', function(){
+            console.log("Socket Connected");
+        });
+
+        this.setState({socket});
+    }
+
+    joinRoom(roomName){
+        const {socket} = this.state;
+        socket.emit('joinRoom', roomName);
     }
 
     handleClose(){
@@ -37,10 +57,10 @@ class RoomHome extends Component{
                     </div>
                     <div className="homeModals">
                         <div className="createModal">
-                            <JoinRoomModal buttonText="Create Room" type="create" modalTitle="Create room" />
+                            <JoinRoomModal buttonText="Create Room" type="create" modalTitle="Create room" joinRoom={this.joinRoom} />
                         </div>
                         <div className="createModal">
-                            <JoinRoomModal buttonText="Join Room" type="join" modalTitle="Join room" />
+                            <JoinRoomModal buttonText="Join Room" type="join" modalTitle="Join room" joinRoom={this.joinRoom} />
                         </div>
                     </div>
                 </div>

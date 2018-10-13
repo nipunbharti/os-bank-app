@@ -37,9 +37,10 @@ class JoinRoomModal extends Component {
         })
         .then(res => res.json())
         .then(json => {
-            this.props.history.push('/testsocket');
+            this.props.joinRoom(this.state.roomName);
+            // this.props.history.push('/testsocket');
             console.log(json);
-        })
+        });
     }
     else{
         fetch("/api/joinRoom", {
@@ -55,7 +56,10 @@ class JoinRoomModal extends Component {
         })
         .then(res => res.json())
         .then(json => {
-            this.props.history.push('/testsocket');
+            if(json.success){
+              this.props.joinRoom(this.state.roomName);
+              // this.props.history.push('/testsocket');
+            }
             console.log(json);
         })
     }

@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Input, Icon, Button, Alert} from 'antd';
 import {withRouter} from 'react-router-dom';
 import './Login.css';
-import { timingSafeEqual } from 'crypto';
 
 class Login extends Component{
 
