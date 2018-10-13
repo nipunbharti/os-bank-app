@@ -29,11 +29,6 @@ class RoomHome extends Component{
         this.setState({socket});
     }
 
-    joinRoom(roomName){
-        const {socket} = this.state;
-        socket.emit('joinRoom', roomName);
-    }
-
     handleClose(){
         this.setState({
             visible: false
@@ -48,19 +43,20 @@ class RoomHome extends Component{
     }
 
     render(){
+        console.log(localStorage.getItem('sessionToken'));
         return(
             <div>
-                {(localStorage.getItem('sessionToken') != null)  ? 
+                {(localStorage.getItem('sessionToken') != null) ? 
                 <div className="roomHomeContainer">
                     <div className="logoutButton">
                         <Button type="primary" onClick={this.handleLogout}>Logout</Button>
                     </div>
                     <div className="homeModals">
                         <div className="createModal">
-                            <JoinRoomModal buttonText="Create Room" type="create" modalTitle="Create room" joinRoom={this.joinRoom} />
+                            <JoinRoomModal buttonText="Create Room" type="create" modalTitle="Create room" socket={this.state.socket} />
                         </div>
                         <div className="createModal">
-                            <JoinRoomModal buttonText="Join Room" type="join" modalTitle="Join room" joinRoom={this.joinRoom} />
+                            <JoinRoomModal buttonText="Join Room" type="join" modalTitle="Join room" socket={this.state.socket} />
                         </div>
                     </div>
                 </div>

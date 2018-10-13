@@ -72,7 +72,7 @@ io.on('connection', function(socket){
   	socket.on('joinRoom', function(roomName){
   		console.log("Triggered Join Room");
   		socket.join(roomName);
-    	io.sockets.in(roomName).emai('chat message', "New User Joined Room");
+    	io.sockets.in(roomName).emit('chat message', "New User Joined Room");
   	});
 
 

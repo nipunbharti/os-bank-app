@@ -37,7 +37,7 @@ class JoinRoomModal extends Component {
         })
         .then(res => res.json())
         .then(json => {
-            this.props.joinRoom(this.state.roomName);
+            this.joinRoom("room2");
             // this.props.history.push('/testsocket');
             console.log(json);
         });
@@ -57,7 +57,7 @@ class JoinRoomModal extends Component {
         .then(res => res.json())
         .then(json => {
             if(json.success){
-              this.props.joinRoom(this.state.roomName);
+              this.joinRoom(this.state.roomName);
               // this.props.history.push('/testsocket');
             }
             console.log(json);
@@ -66,6 +66,22 @@ class JoinRoomModal extends Component {
     this.setState({
       visible: false
     });
+  }
+
+  // createRoom(roomName){
+  //   const {socket} = this.props;
+  //   socket.emit('joinRoom', roomName);
+  //   socket.on('chat message', function(msg){
+  //     console.log(msg);
+  //   })
+  // }
+
+  joinRoom(roomName){
+    const {socket} = this.props;
+    socket.emit('joinRoom', roomName);
+    socket.on('chat message', function(msg){
+      console.log(msg);
+    })
   }
 
   handleCancel(e) {
@@ -82,7 +98,6 @@ class JoinRoomModal extends Component {
   }
 
   render() {
-      console.log(localStorage.getItem('sessionMail'));
     var inputText;
     this.props.type == "join"
       ? (inputText = "Enter the room name to join")
