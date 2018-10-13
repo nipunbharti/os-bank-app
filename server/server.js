@@ -62,10 +62,22 @@ if (isDev) {
 
 io.on('connection', function(socket){
 	console.log("server connected");
-  socket.on('chat message', function(msg){
+
+
+  	socket.on('chat message', function(msg){
   	console.log("recv");
     io.emit('chat message', msg);
-  });
+  	});
+
+  	socket.on('joinRoom', function(roomName){
+  		console.log("Triggered Join Room");
+  		socket.join(roomName);
+    	io.sockets.in(roomName).emai('chat message', "New User Joined Room");
+  	});
+
+
+
+
 });
 
 server.listen(port, '0.0.0.0', (err) => {
