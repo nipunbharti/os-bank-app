@@ -60,6 +60,14 @@ if (isDev) {
   });
 }
 
+io.on('connection', function(socket){
+	console.log("server connected");
+  socket.on('chat message', function(msg){
+  	console.log("recv");
+    io.emit('chat message', msg);
+  });
+});
+
 server.listen(port, '0.0.0.0', (err) => {
   if (err) {
     console.log(err);
