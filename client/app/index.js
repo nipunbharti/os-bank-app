@@ -12,6 +12,7 @@ import {
 import App from './components/App/App';
 import Home from './components/Home/Home';
 import RoomHome from './components/RoomHome/RoomHome';
+import TestSocket from './components/TestSocket/TestSocket';
 
 
 import './styles/styles.scss';
@@ -22,6 +23,7 @@ render((
       <Switch>
         <Route exact path="/" component={Home}/>
         <Route  path="/roomhome" component={RoomHome}/>
+        <Route  path="/testsocket" component={TestSocket}/>
       </Switch>
     </App>
   </Router>

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Button, Modal, Input, Icon } from "antd";
+import {withRouter} from 'react-router-dom';
 
 class JoinRoomModal extends Component {
   constructor() {
@@ -36,6 +37,7 @@ class JoinRoomModal extends Component {
         })
         .then(res => res.json())
         .then(json => {
+            this.props.history.push('/testsocket');
             console.log(json);
         })
     }
@@ -53,6 +55,7 @@ class JoinRoomModal extends Component {
         })
         .then(res => res.json())
         .then(json => {
+            this.props.history.push('/testsocket');
             console.log(json);
         })
     }
@@ -105,4 +108,4 @@ class JoinRoomModal extends Component {
   }
 }
 
-export default JoinRoomModal;
+export default withRouter(JoinRoomModal);
