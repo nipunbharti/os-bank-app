@@ -1,14 +1,17 @@
 const User = require('../../models/User');
 const UserSession = require('../../models/UserSession');
+const Account = require('../../models/Account');
+const Balance = require('../../models/Balance');
+const Passbook = require('../../models/Passbook');
 
 module.exports = (app) => {
 
-  app.post('/api/signUp', function (req, res, next) {
+  app.post('/api/signUpSingle', function (req, res, next) {
     let {body} = req;
     let {userName} = body;
     let {email} = body;
     let {password} = body;
-
+    var accountNo;
     if (!userName) {
       return res.send({
         success: false,
@@ -36,7 +39,7 @@ module.exports = (app) => {
     // 2. Save
 
     User.find({
-      email: email
+      userName: userName
     }, (err, previousUsers) => {
       if (err) {
         return res.send({
@@ -63,10 +66,57 @@ module.exports = (app) => {
             message: 'Error: Server error'
           });
         }
-        return res.send({
-          success: true,
-          message: 'Signed up'
+      while(1) {
+        var found = 0;
+        accountNo = Math.floor(100000 + Math.random() * 900000);
+        Account.find({
+          accountNo: accountNo
+        }, (err, accounts) => {
+          if (err) {
+            return res.send({
+              success: false,
+              message: 'Error: Server error'
+            });
+          }
+          if (accounts.length != 0) {
+            found = 1;
+          }
         });
+        if(found == 0)
+          break;
+      }
+      const newAccount = new Account();
+      newAccount.userName = user.userName;
+      newAccount.accountNo = accountNo;
+
+      newAccount.save((err, account) => {
+        if (err) {
+          return res.send({
+            success: false,
+            message: 'Error: Server error'
+          });
+        }
+
+        const newBalance = new Balance();
+        newBalance.accountNo = account.accountNo;
+        newBalance.balance = 0;
+
+        newBalance.save((err, balance) => {
+          if (err) {
+            return res.send({
+              success: false,
+              message: 'Error: Server error'
+            });
+          }
+          return res.send({
+            success: true,
+            message: 'Signed up',
+            accountNo:  balance.accountNo
+          });
+
+        })
+      })
+
       });
     });
 

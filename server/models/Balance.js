@@ -8,6 +8,10 @@ const BalanceSchema = new mongoose.Schema({
   balance: {
     type: Number,
     default: ''
+  },
+  mutex: {
+    type: Boolean,
+    default: false
   }
 });
 
