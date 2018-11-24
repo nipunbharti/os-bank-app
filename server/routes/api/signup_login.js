@@ -312,13 +312,13 @@ module.exports = (app) => {
 
   app.post('/api/login', function (req, res, next) {
     let {body} = req;
-    let {email} = body;
+    let {userName} = body;
     let {password} = body;
 
-    if (!email) {
+    if (!userName) {
       return res.send({
         success: false,
-        message: 'Error: Email cannot be blank.'
+        message: 'Error: User Name cannot be blank.'
       });
     }
     if (!password) {
@@ -328,15 +328,13 @@ module.exports = (app) => {
       });
     }
 
-    email = email.toLowerCase();
-    email = email.trim();
 
     // Steps:
     // 1. Verify email exists
     // 2. Check if the password is correct
 
     User.find({
-      email: email
+      userName: userName
     }, (err, users) => {
       if (err) {
         return res.send({
@@ -360,7 +358,7 @@ module.exports = (app) => {
       }
       // Create a Session for user
       const userSession = new UserSession();
-      userSession.email = user.email;
+      userSession.userName = user.userName;
 
       userSession.save((err, doc) => {
         if (err) {
@@ -369,16 +367,45 @@ module.exports = (app) => {
             message: 'Error: Server error'
           });
         }
-        return res.send({
-          success: true,
-          message: 'Valid sign in',
-          token: doc._id,
-          email: doc.email
-        });
-      })
+        Account.find({
+          userName: userName
+        }, (err, accounts) => {
+          if (err) {
+            return res.send({
+              success: false,
+              message: 'Error: Server error'
+            });
+          } else if (accounts.length > 1) {
+            return res.send({
+              success: false,
+              message: 'More than one Account Number is mapped to username'
+            });
+          }
+          Balance.find({
+            accountNo: accounts[0].accountNo
+          }, (err,balances) => {
+            if (err) {
+              return res.send({
+                success: false,
+                message: 'Error: Server error'
+              });
+            }
+            return res.send({
+              success: true,
+              message: 'Valid sign in',
+              token: doc._id,
+              username: accounts[0].userName,
+              accountNo: accounts[0].accounts,
+              balance: balances[0].balance
+            });
+
+          });
+
+      });
 
     });
 
+  });
   });
 
   app.get('/api/logout', (req, res, next) => {
