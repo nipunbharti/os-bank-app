@@ -8,7 +8,7 @@ class Login extends Component{
     constructor(props) {
         super(props);
         this.state = {
-          email: '',
+          userName: '',
           password: '',
           visible: false
         };
@@ -26,8 +26,8 @@ class Login extends Component{
 
     onChangeInput(e, type){
         switch(type){
-            case "email":
-                this.setState({ email: e.target.value });
+            case "username":
+                this.setState({ userName: e.target.value });
                 break;
 
             case "password":
@@ -44,7 +44,7 @@ class Login extends Component{
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                email: this.state.email,
+                userName: this.state.userName,
                 password: this.state.password
             }),
         })
@@ -58,7 +58,6 @@ class Login extends Component{
             else{
                 localStorage.setItem('sessionToken', json.token);
                 localStorage.setItem('sessionMail', json.email);
-                this.props.history.push("/roomhome");
             }
             console.log(json);
         })
@@ -77,10 +76,10 @@ class Login extends Component{
                 <div className="inputBoxFlex">
                     <p className="inputBoxText">Log In</p>
                     <Input
-                        placeholder="Enter your Email"
+                        placeholder="Enter your username"
                         prefix={<Icon type="mail" theme="outlined" />}
-                        value={this.state.email}
-                        onChange={(e) => this.onChangeInput(e, "email")}
+                        value={this.state.userName}
+                        onChange={(e) => this.onChangeInput(e, "username")}
                         ref={node => this.userNameInput = node}
                         style={{padding:'6px',width:'200pt',height:'40pt'}}
                     />
@@ -93,7 +92,7 @@ class Login extends Component{
                         type="password"
                         style={{padding:'6px',width:'200pt',height:'40pt'}}
                     />
-                    {this.state.visible ? <Alert message="Wrong password/email" type="error" closable afterClose={this.handleAlertClose} className="alertWrong" /> : <></>}
+                    {this.state.visible ? <Alert message="Wrong password/username" type="error" closable afterClose={this.handleAlertClose} className="alertWrong" /> : <></>}
                     <Button type="primary" style={{marginTop:'10pt',padding:'6px',width:'200pt',height:'30pt'}} onClick={this.loginDetails}>Login</Button>
                 </div>
             </div>

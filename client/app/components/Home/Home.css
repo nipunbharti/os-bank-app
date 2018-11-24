@@ -5,6 +5,18 @@
 
 .credentials{
     width:100%;
-    align-items: center;
+}
 
+.accountTypeDiv {
+	display: flex;
+	justify-content: flex-end;
+	padding: 20px;
+}
+
+.accountType {
+	font-size: 25px;
+}
+
+.signUpLoginDiv {
+	display: flex;
 }
