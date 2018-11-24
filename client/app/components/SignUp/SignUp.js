@@ -55,6 +55,8 @@ class SignUp extends Component{
 
     signUpDetails(){
         if(this.props.typeOfAccount == 'single') {
+            console.log('In');
+            console.log(this.state.userName1, this.state.email1, this.state.password1);
             fetch('/api/signUpSingle',{
                 method: 'POST',
                 headers: {
@@ -68,7 +70,11 @@ class SignUp extends Component{
                 }),
             })
             .then(res => res.json())
-            .then(json => console.log(json))
+            .then(json => {
+                console.log(json);
+                alert('You have signed up and your account number is: '.concat(json.accountNo));
+            })
+            .catch(err => console.log(err))
         }
         else {
             fetch('/api/signUpJoint',{
@@ -87,7 +93,10 @@ class SignUp extends Component{
                 }),
             })
             .then(res => res.json())
-            .then(json => console.log(json))
+            .then(json => {
+                console.log(json);
+                alert('You have signed up and your account number is: '.concat(json.accountNo));
+            })
         }
     }
 
@@ -100,7 +109,7 @@ class SignUp extends Component{
                     <Input
                         placeholder="Enter your username"
                         prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                        value={this.state.userName}
+                        value={this.state.userName1}
                         onChange={(e) => this.onChangeInput(e, "username1")}
                         ref={node => this.userNameInput = node}
                         style={{padding:'6px',width:'200pt',height:'40pt'}}
@@ -108,7 +117,7 @@ class SignUp extends Component{
                     <Input
                         placeholder="Enter your Email"
                         prefix={<Icon type="mail" theme="outlined" />}
-                        value={this.state.email}
+                        value={this.state.email1}
                         onChange={(e) => this.onChangeInput(e, "email1")}
                         ref={node => this.userNameInput = node}
                         style={{padding:'6px',width:'200pt',height:'40pt'}}
@@ -116,7 +125,7 @@ class SignUp extends Component{
                     <Input
                         placeholder="Enter your password"
                         prefix={<Icon type="key" theme="outlined" />}
-                        value={this.state.password}
+                        value={this.state.password1}
                         onChange={(e) => this.onChangeInput(e, "password1")}
                         ref={node => this.userNameInput = node}
                         type="password"
@@ -154,7 +163,6 @@ class SignUp extends Component{
                             type="password"
                             style={{padding:'6px',width:'200pt',height:'40pt'}}
                         />
-                        <Button type="primary" style={{marginTop:'10pt',padding:'6px',width:'200pt',height:'30pt'}} onClick={this.signUpDetails}>Sign Up</Button>
                     </div>
                     <br />
                     <div className="inputBoxFlex">

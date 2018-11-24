@@ -21,6 +21,7 @@ export default class BankHome extends Component {
         this.handleCancel = this.handleCancel.bind(this);
         this.modalWithdraw = this.modalWithdraw.bind(this);
         this.modalCredit = this.modalCredit.bind(this);
+        this.handleLogout = this.handleLogout.bind(this);
     }
 
     handleOkWithdraw(amount) {
@@ -56,9 +57,17 @@ export default class BankHome extends Component {
         });
     }
 
+    handleLogout() {
+        localStorage.setItem('sessionToken', null);
+        this.props.history.push('/');
+    }
+
     render() {
         return (
             <div className='mainContainerBank'>
+                <div style={{display: 'flex', justifyContent: 'flex-end', padding: '25px'}}>
+                    <Button type="primary" size="large" onClick={this.handleLogout}>Logout</Button>
+                </div>
                 <InfoCards />
                 <div className="optionsGrid">
                     <div className="equalDiv">
