@@ -17,6 +17,9 @@ class Home extends Component {
 		this.changeAccount = this.changeAccount.bind(this);
 	}
 
+	componentDidMount() {
+		localStorage.setItem('sessionToken', null);
+	}
 
 	changeAccount(e, type) {
 		this.setState({
