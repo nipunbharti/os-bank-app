@@ -5,25 +5,20 @@ import 'antd/dist/antd.css';
 import {
   BrowserRouter as Router,
   Route,
-  Link,
   Switch
 } from 'react-router-dom'
 
 import App from './components/App/App';
 import Home from './components/Home/Home';
-import RoomHome from './components/RoomHome/RoomHome';
-import TestSocket from './components/TestSocket/TestSocket';
-
-
+import BankHome from './components/BankHome/BankHome';
 import './styles/styles.scss';
 
 render((
   <Router>
     <App>
       <Switch>
-        <Route exact path="/" component={Home}/>
-        <Route  path="/roomhome" component={RoomHome}/>
-        <Route  path="/testsocket" component={TestSocket}/>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/bankhome" component={BankHome} />
       </Switch>
     </App>
   </Router>

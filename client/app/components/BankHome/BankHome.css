@@ -1,0 +1,36 @@
+.mainContainerBank {
+    
+}
+
+.cardsContainer {
+    padding: 30px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.currentAmount {
+    font-size: 25px;
+}
+
+.optionsGrid {
+    display: flex;
+    padding: 30px;
+}
+
+.equalDiv {
+    height: 150px;
+    width: 33.3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.divider {
+    background-color: darkgray;
+    height: 150px;
+}
+
+.icons {
+    font-size: 50px;
+}

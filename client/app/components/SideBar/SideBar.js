@@ -8,7 +8,7 @@ import './SideBar.css';
          return(
              <div className="sideBar">
                 <div className="content">
-                    <p className="contentText">CHAT-ROOM</p>
+                    <p className="contentText">WECLOME TO<br />OS BANK</p>
                 </div>
              </div>
          )
