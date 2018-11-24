@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const UserSessionSchema = new mongoose.Schema({
-  email: {
+  userName: {
     type: String,
     default: ''
   },

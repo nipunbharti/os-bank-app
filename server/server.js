@@ -23,7 +23,6 @@ mongoose.Promise = global.Promise;
 
 const app = express();
 const server = require('http').createServer(app);
-const io = require('socket.io')(server);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -60,25 +59,7 @@ if (isDev) {
   });
 }
 
-io.on('connection', function(socket){
-	console.log("server connected");
 
-
-  	socket.on('chat message', function(msg){
-  	console.log("recv");
-    io.emit('chat message', msg);
-  	});
-
-  	socket.on('joinRoom', function(roomName){
-  		console.log("Triggered Join Room");
-  		socket.join(roomName);
-    	io.sockets.in(roomName).emit('chat message', "New User Joined Room");
-  	});
-
-
-
-
-});
 
 server.listen(port, '0.0.0.0', (err) => {
   if (err) {
