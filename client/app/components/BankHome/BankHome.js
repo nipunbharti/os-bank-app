@@ -63,12 +63,13 @@ export default class BankHome extends Component {
     }
 
     render() {
+        let jsonData = this.props.location.state.json;
         return (
             <div className='mainContainerBank'>
                 <div style={{display: 'flex', justifyContent: 'flex-end', padding: '25px'}}>
                     <Button type="primary" size="large" onClick={this.handleLogout}>Logout</Button>
                 </div>
-                <InfoCards />
+                <InfoCards totalAmount={jsonData.balance} accountNumber={jsonData.accountNo} />
                 <div className="optionsGrid">
                     <div className="equalDiv">
                         <Icon type="shopping-cart" className="icons" />

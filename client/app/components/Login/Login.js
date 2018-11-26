@@ -58,6 +58,10 @@ class Login extends Component{
             else{
                 localStorage.setItem('sessionToken', json.token);
                 localStorage.setItem('sessionMail', json.email);
+                this.props.history.push({
+                    pathname: '/bankhome',
+                    state: {json: json}
+                });
             }
             console.log(json);
         })

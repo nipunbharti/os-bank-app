@@ -18,7 +18,7 @@ render((
     <App>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/bankhome" component={BankHome} />
+        <Route path="/bankhome" component={BankHome} />
       </Switch>
     </App>
   </Router>
