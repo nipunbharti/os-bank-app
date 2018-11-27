@@ -517,4 +517,108 @@ module.exports = (app) => {
       })
     });
 
+    app.post('/api/withdrawl', (req, res, next) => {
+      let {body} = req;
+      let {accountNo} = body;
+      let {value} = body;
+      
+      if(!accountNo) {
+        return res.send({
+          success: false,
+          message: `Account No cant be empty`
+        });
+      }
+
+      if(!value) {
+        return res.send({
+          success: false,
+          message: `Value cant be empty`
+        });
+      }
+
+      Balance.find({
+        accountNo: accountNo
+      }, (err, balance) => {
+        if (err) {
+          return res.send({
+            success: false,
+            message: 'Error: Server error'
+          });
+        }
+
+        let currentBalance = balance[0].balance;
+        if(value > currentBalance) {
+          return res.send({
+            success: false,
+            message: 'Withdrawl amount is more than current balance'
+          });
+        }
+        Balance.updateOne({
+          accountNo: accountNo
+        }, {$set: {balance: currentBalance - value}}, (err, balance) => {
+          if(err) {
+            return res.send({
+              success: false,
+              message: 'Error: Server error'
+            });
+          }
+          return res.send({
+            success: true,
+            message: `Transaction Successful`,
+            balance: currentBalance - value
+          })
+        })
+
+      })
+    });
+
+    app.post('/api/credit', (req, res, next) => {
+      let {body} = req;
+      let {accountNo} = body;
+      let {value} = body;
+      
+      if(!accountNo) {
+        return res.send({
+          success: false,
+          message: `Account No cant be empty`
+        });
+      }
+
+      if(!value) {
+        return res.send({
+          success: false,
+          message: `Value cant be empty`
+        });
+      }
+
+      Balance.find({
+        accountNo: accountNo
+      }, (err, balance) => {
+        if (err) {
+          return res.send({
+            success: false,
+            message: 'Error: Server error'
+          });
+        }
+
+        let currentBalance = balance[0].balance;
+        Balance.updateOne({
+          accountNo: accountNo
+        }, {$set: {balance: currentBalance + value}}, (err, balance) => {
+          if(err) {
+            return res.send({
+              success: false,
+              message: 'Error: Server error'
+            });
+          }
+          return res.send({
+            success: true,
+            message: `Transaction Successful`,
+            balance: currentBalance + value
+          })
+        })
+
+      })
+    });
+
 };
