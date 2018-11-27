@@ -395,7 +395,7 @@ module.exports = (app) => {
               message: 'Valid sign in',
               token: doc._id,
               username: accounts[0].userName,
-              accountNo: accounts[0].accounts,
+              accountNo: accounts[0].accountNo,
               balance: balances[0].balance
             });
 
