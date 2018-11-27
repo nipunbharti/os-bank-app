@@ -562,10 +562,25 @@ module.exports = (app) => {
               message: 'Error: Server error'
             });
           }
-          return res.send({
-            success: true,
-            message: `Transaction Successful`,
-            balance: currentBalance - value
+          const newTransaction = new Passbook();
+
+          newTransaction.accountNo = accountNo;
+          newTransaction.type = "DEBIT";
+          newTransaction.value = value;
+
+          newTransaction.save((err,doc) => {
+              if(err) {
+                return res.send({
+                  success: false,
+                  message: 'Error: Server error'
+                });
+              }
+              return res.send({
+                success: true,
+                message: `Transaction Successful`,
+                balance: currentBalance - value
+              })
+
           })
         })
 
@@ -611,13 +626,54 @@ module.exports = (app) => {
               message: 'Error: Server error'
             });
           }
-          return res.send({
-            success: true,
-            message: `Transaction Successful`,
-            balance: currentBalance + value
+
+          const newTransaction = new Passbook();
+
+          newTransaction.accountNo = accountNo;
+          newTransaction.type = "CREDIT";
+          newTransaction.value = value;
+
+          newTransaction.save((err,doc) => {
+              if(err) {
+                return res.send({
+                  success: false,
+                  message: 'Error: Server error'
+                });
+              }
+              return res.send({
+                success: true,
+                message: `Transaction Successful`,
+                balance: currentBalance + value
+              })
+
           })
         })
 
+      })
+    });
+
+    app.post('/api/passbook', (req, res, next) => {
+
+      let {body} = req;
+      let {accountNo} = body;
+      
+      if(!accountNo) {
+        return res.send({
+          success: false,
+          message: `Account No cant be empty`
+        });
+      }
+
+      Passbook.find({
+        accountNo: accountNo
+      }, (err, transactions) => {
+        if (err) {
+          return res.send({
+            success: false,
+            message: 'Error: Server error'
+          });
+        }
+        return res.send(transactions);
       })
     });
 
