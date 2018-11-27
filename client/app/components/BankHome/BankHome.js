@@ -60,6 +60,19 @@ export default class BankHome extends Component {
     handleLogout() {
         localStorage.setItem('sessionToken', null);
         this.props.history.push('/');
+        fetch('/api/unlockdb', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                accountNo: this.props.location.state.json.accountNo
+            }),
+        })
+        .then(res => res.json())
+        .then(resJson => console.log(resJson))
+        
     }
 
     render() {

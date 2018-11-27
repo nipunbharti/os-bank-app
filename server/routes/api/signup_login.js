@@ -434,5 +434,87 @@ module.exports = (app) => {
       });
     });
 
+    app.post('/api/lockdb', (req, res, next) => {
+      let {body} = req;
+      let {accountNo} = body;
+      
+      if(!accountNo) {
+        return res.send({
+          success: false,
+          message: `Error: DB couldn't be locked`
+        });
+      }
+
+      Balance.updateOne({
+        accountNo: accountNo
+      }, {$set: {mutex: true}}, (err, balance) => {
+        if(err) {
+          return res.send({
+            success: false,
+            message: 'Error: Server error'
+          });
+        }
+
+        return res.send({
+          success: true,
+          message: `DB locked`,
+        })
+      })
+    });
+
+    app.post('/api/unlockdb', (req, res, next) => {
+      let {body} = req;
+      let {accountNo} = body;
+      
+      if(!accountNo) {
+        return res.send({
+          success: false,
+          message: `Error: DB couldn't be unlocked`
+        });
+      }
+
+      Balance.updateOne({
+        accountNo: accountNo
+      }, {$set: {mutex: false}}, (err, balance) => {
+        if(err) {
+          return res.send({
+            success: false,
+            message: 'Error: Server error'
+          });
+        }
+
+        return res.send({
+          success: true,
+          message: `DB Unlocked`,
+        })
+      })
+    });
+
+    app.post('/api/getdetails', (req, res, next) => {
+      let {body} = req;
+      let {accountNo} = body;
+      
+      if(!accountNo) {
+        return res.send({
+          success: false,
+          message: `Error: DB couldn't be locked`
+        });
+      }
+
+      Balance.find({
+        accountNo: accountNo
+      }, (err, balance) => {
+        if (err) {
+          return res.send({
+            success: false,
+            message: 'Error: Server error'
+          });
+        }
+
+        return res.send({
+          balance: balance
+        });
+      })
+    });
 
 };
