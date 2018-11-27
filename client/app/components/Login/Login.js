@@ -56,26 +56,12 @@ class Login extends Component{
                 })
             }
             else{
-                fetch('/api/lockdb', {
-                    method: 'POST',
-                    headers: {
-                        Accept: 'application/json',
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        accountNo: json.accountNo
-                    }),
-                })
-                .then(res => res.json())
-                .then(resJson => {
-                    localStorage.setItem('sessionToken', json.token);
-                    localStorage.setItem('sessionMail', json.email);
-                    this.props.history.push({
-                        pathname: '/bankhome',
-                        state: {json: json}
-                    });
-                    console.log(resJson);
-                })
+                localStorage.setItem('sessionToken', json.token);
+                localStorage.setItem('sessionMail', json.email);
+                this.props.history.push({
+                    pathname: '/bankhome',
+                    state: {json: json, userName: this.state.userName}
+                });
             }
             console.log(json);
         })

@@ -17,6 +17,12 @@ export default class WithdrawlModal extends Component {
         });
     }
 
+    componentWillUnmount() {
+        this.setState({
+            amount: null
+        })
+    }
+
     render() {
         return (
             <div>
