@@ -62,6 +62,13 @@ export default class BankHome extends Component {
                 currentAmount: resJson.balance[0].balance
             })
         })
+
+        setTimeout(() => {
+            localStorage.setItem('sessionToken', null);
+            this.props.history.push('/');
+            this.unlockDb();
+            alert('Session timed out');
+        }, 1000*60*10)
     }
 
     handleOkTable() {
